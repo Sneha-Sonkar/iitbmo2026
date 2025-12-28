@@ -18,13 +18,12 @@ body {
 
 /* ===== NAVBAR ===== */
 .navbar {
-  position: fixed;
+ position: fixed;
   top: 0;
   width: 100%;
   height: 70px;
   background: black;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 0 40px;
   z-index: 9999;
@@ -35,6 +34,9 @@ body {
   display: flex;
   align-items: center;
   gap: 14px;
+}
+.nav-links {
+  margin-left: auto;   /* pushes menu to right */
 }
 
 /* Circular logo */
@@ -374,34 +376,52 @@ canvas {
   }
 }
 
-/* ---------- Mobile (≤ 768px) ---------- */
+  /* NAVBAR */
+ /* ---------- Mobile (≤ 768px) ---------- */
 @media (max-width: 768px) {
 
   /* NAVBAR */
   .navbar {
-    flex-direction: column;
-    height: auto;
-    padding: 10px 15px;
+    flex-direction: row;      /* keep single line */
+    height: 70px;
+    padding: 0 16px;
   }
 
-  .nav-left {
-    margin-bottom: 8px;
+  .hamburger {
+    display: block;           /* show ONLY on mobile */
+    margin-left: auto;
   }
 
   .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 14px;
+    position: absolute;
+    top: 70px;                /* below navbar */
+    left: 0;
+    width: 100%;
+    background: black;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    width: 100%;
+    text-align: center;
+    padding: 14px 0;
+    border-top: 1px solid #222;
   }
 
   .nav-links a {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   /* SECTIONS */
   .section {
     font-size: 26px;
-    height: auto;               /* ❗ avoid 100vh on mobile */
+    height: auto;
     min-height: 100vh;
     padding: 120px 20px 60px;
   }
@@ -511,5 +531,13 @@ canvas {
   .member.head img {
     width: 95px;
     height: 95px;
+  }
+}
+
+
+/* ================= DESKTOP HARD OVERRIDE ================= */
+@media (min-width: 769px) {
+  .hamburger {
+    display: none !important;
   }
 }
