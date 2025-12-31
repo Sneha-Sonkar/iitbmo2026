@@ -109,6 +109,56 @@ body {
   width: 100%;
 }
 
+/* ================= MOBILE RESPONSIVENESS ================= */
+
+@media (max-width: 768px) {
+    /* Show the hamburger icon */
+    .hamburger {
+        display: block;
+    }
+
+    /* Hide the nav-links by default and style them as a mobile overlay */
+    .nav-links {
+        position: fixed;
+        right: -100%; /* Hidden off-screen to the right */
+        top: 70px;    /* Start below the navbar */
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        transition: 0.4s ease-in-out;
+        z-index: 10000;
+        margin-left: 0;
+    }
+
+    /* When 'active' class is added via JS, slide it in */
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 20px; /* Larger links for touch */
+        color: white;
+    }
+
+    /* Adjust font sizes for smaller screens */
+    #home h3 {
+        font-size: 2rem;
+    }
+    
+    .title .main {
+        font-size: 18px;
+    }
+    
+    .nav-left {
+        gap: 8px;
+    }
+}
+
 /* ===== VANTA BACKGROUND ===== */
 #vanta-bg {
   position: relative;
