@@ -84,7 +84,7 @@ function filterGallery(category) {
     }
 
     // Toggle display immediately so they take up space
-    item.style.display = shouldShow ? 'block' : 'none';
+    item.style.display = shouldShow ? 'grid' : 'none';
 
     // Apply fade-in animation if it should be seen
     if (shouldShow) {

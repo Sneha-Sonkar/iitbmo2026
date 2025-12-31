@@ -227,6 +227,16 @@ body {
 
 .iitb { color: #00bfff; font-weight: 500; }
 
+/* Sets all links to a specific shade of blue */
+a:link, a:visited {
+  color: #f4f4f5; 
+}
+
+/* Sets the color to orange on hover and active states */
+a:hover, a:active {
+  color: rgb(218, 162, 249);
+}
+
 /* ===== TEAM SECTION ===== */
 .team-section {
   height: auto; /* Allows section to expand for long lists */
@@ -826,50 +836,54 @@ body {
   background: white;
   color: #001f4d;
 }
+
+
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: auto;
+  /* Reduced from 300px to 220px to make boxes smaller and allow 4-5 columns on laptops */
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
   gap: 20px;
-  justify-content: center;
-  max-width: 1000px;
+  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 20px;
 }
 
 .gallery-item {
-  position: relative;
+  width: 100%;
+  background: white; /* Matches the card style in your image */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border-radius: 4px;
   overflow: hidden;
-  cursor: pointer;
   transition: transform 0.3s ease;
 }
 
 .gallery-item img {
   width: 100%;
-  height: auto;
+  /* Reduced height to keep the card proportions balanced with the new width */
+  height: 180px; 
+  object-fit: cover;
   display: block;
-  transition: transform 0.4s ease;
-}
-
-.gallery-item:hover img {
-  transform: scale(1.05);
 }
 
 .gallery-item .overlay {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  color: #fff;
+  padding: 15px;
   text-align: center;
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: bold;
-  transition: background 0.3s ease;
+  color: #888;
+  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+  background: white; /* Based on your reference image */
+  position: static; /* Removes the absolute hover effect so text is always visible */
 }
 
+/* Fix: Remove the dark hover background so it stays white like your reference image */
 .gallery-item:hover .overlay {
-  background: rgba(0, 0, 0, 0.8);
+  background: white; 
+  color: #00bfff; /* Optional: text turns blue on hover instead */
 }
+
 
 #toppersMessage {
   width: 100%;
