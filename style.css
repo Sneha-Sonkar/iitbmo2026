@@ -109,56 +109,91 @@ body {
   width: 100%;
 }
 
-/* ================= MOBILE RESPONSIVENESS ================= */
+/* ================= FIXED MOBILE & RESIZE RESPONSIVENESS ================= */
 
-@media (max-width: 768px) {
-    /* Show the hamburger icon */
+/* We use 1024px so you can see the hamburger easily on a laptop resize */
+@media (max-width: 1024px) {
+    
     .hamburger {
-        display: block;
+        display: block !important; /* Force it to show */
+        font-size: 35px;
+        cursor: pointer;
+        color: #00bfff;
+        z-index: 10002;
+        position: relative;
     }
 
-    /* Hide the nav-links by default and style them as a mobile overlay */
     .nav-links {
-        position: fixed;
-        right: -100%; /* Hidden off-screen to the right */
-        top: 70px;    /* Start below the navbar */
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(10px);
+        display: flex; /* Always flex, but moved off-screen */
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 30px;
-        transition: 0.4s ease-in-out;
-        z-index: 10000;
-        margin-left: 0;
+        position: fixed;
+        top: 70px;
+        right: -100%; /* Start off-screen */
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: rgba(10, 25, 47, 0.98); /* Solid theme color */
+        backdrop-filter: blur(15px);
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 10001;
+        gap: 25px;
     }
 
-    /* When 'active' class is added via JS, slide it in */
+    /* Slid-in state */
     .nav-links.active {
         right: 0;
     }
 
-    .nav-links a {
-        font-size: 20px; /* Larger links for touch */
-        color: white;
+    .nav-links li {
+        width: 100%;
+        text-align: center;
     }
 
-    /* Adjust font sizes for smaller screens */
-    #home h3 {
-        font-size: 2rem;
+    .nav-links a {
+        font-size: 22px;
+        color: white;
+        display: block;
+        padding: 15px;
+        width: 100%;
     }
-    
+
+    /* Smaller Title for Mobile */
     .title .main {
         font-size: 18px;
     }
     
-    .nav-left {
-        gap: 8px;
+    .logo {
+        width: 35px;
+        height: 35px;
     }
 }
 
+/* Adjust Team and News Grids for smaller screens */
+@media (max-width: 768px) {
+    .team-row {
+        gap: 20px;
+    }
+    
+    .member {
+        width: 150px;
+    }
+    
+    .member img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .news-grid {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
 /* ===== VANTA BACKGROUND ===== */
 #vanta-bg {
   position: relative;
@@ -217,53 +252,114 @@ body {
   text-transform: uppercase;
 }
 
-/* ===== TEAM SECTION HEADINGS ===== */
+/* ===== TEAM SECTION CONTAINER ===== */
+.team-section {
+  padding: 100px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent; /* Let Vanta show through */
+}
+
+/* This creates the card look similar to your Eligibility section */
+.team-card-wrapper {
+  max-width: 900px; /* Reduced width to force more rows */
+  width: 100%;
+  padding: 60px 40px;
+  background: rgba(10, 25, 47, 0.85); /* Dark navy matching eligibility */
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 191, 255, 0.3); /* Cyan border glow */
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+}
+
+.team-main-title {
+  font-size: 2.5rem;
+  color: #00bfff;
+  margin-bottom: 50px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+/* ===== GROUPING & ROWS ===== */
 .team-group {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers the rows horizontally */
-  margin-bottom: 80px;
+  align-items: center;
+  margin-bottom: 60px;
   width: 100%;
 }
 
 .team-title {
-  color: #ff4d4d; /* Red Heading */
-  text-align: center; /* Forces text to center */
-  width: 100%;
-  font-size: 1.2rem;
+  color: #ff4d4d; /* Red Title */
+  text-align: center;
+  font-size: 1.4rem;
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 77, 77, 0.3);
+  padding-bottom: 10px;
 }
 
 .team-row {
   display: flex;
-  justify-content: center; /* Centers members within the row */
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 30px;
-  margin-bottom: 20px; /* Space between Head row and Coordinator row */
-}.member {
-  width: 140px;
+  gap: 40px; /* Increased gap for better spacing in compact view */
+}
+
+/* ===== MEMBER STYLES (CIRCULAR) ===== */
+.member {
+  width: 180px; 
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.member:hover {
+  transform: translateY(-10px);
 }
 
 .member img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; /* Reverted to circular */
   border: 2px solid #00bfff;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   object-fit: cover;
+  background: #0a192f;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
 }
 
-.member.head img {
-  width: 120px;
-  height: 120px;
-  border: 3px solid #ff4d4d; /* Distinct border for heads */
+/* Special styling for Heads/OCs */
+.member.head img { 
+  border-color: #ff4d4d; 
+  width: 170px; 
+  height: 170px; 
 }
 
-.member .name { font-size: 0.9rem; font-weight: 600; color: #fff; }
-.member .role { font-size: 0.8rem; color: #aaa; }/* ===== ELIGIBILITY SECTION ===== */
+.member.oc img { 
+  border-color: #fff04d; 
+  width: 170px; 
+  height: 170px; 
+}
+
+.member .name { 
+  font-size: 1.1rem; 
+  font-weight: 600; 
+  color: #fff; 
+  margin-top: 5px;
+  display: block;
+}
+
+.member .role { 
+  font-size: 0.9rem; 
+  color: #00bfff; 
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+/* ===== ELIGIBILITY SECTION ===== */
 .eligibility-section {
   padding: 100px 20px;
 }
@@ -387,6 +483,10 @@ body {
 }
 .about-text {
   flex: 1.2;
+  display: flex;
+    flex-direction: column;
+    align-items: center; /* This centers the left-aligned list block */
+    text-align: center;
 }
 
 .about-text p {
@@ -396,24 +496,33 @@ body {
   margin-bottom: 20px;
 }
 
+/* ===== UPDATED ABOUT FEATURES ===== */
 .about-features {
-  list-style: none;
-  padding: 0;
-  margin-top: 25px;
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+    display: inline-block; /* Keeps the list container as wide as the longest item */
+    text-align: left;      /* Aligns text and bullets to the left inside the container */
+}
+
+.about-text {
+    text-align: center;    /* Keeps the paragraph text centered */
 }
 
 .about-features li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  font-size: 0.95rem;
-  color: #ccc;
+    display: flex;
+    align-items: flex-start; /* Keeps bullet at the top if text wraps */
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #ccc;
 }
 
 .about-features .bullet {
-  color: #00bfff;
-  font-size: 0.8rem;
+    color: #00bfff;
+    font-size: 0.9rem;
+    flex-shrink: 0;        /* Prevents the bullet from squishing on small screens */
+    margin-top: 4px;       /* Aligns bullet vertically with the first line of text */
 }
 
 /* --- Responsive Adjustments --- */
@@ -440,62 +549,65 @@ body {
 
 
 /* ===== NEWS SECTION ENHANCEMENTS ===== */
+/* ===== NEWS SECTION IMPROVEMENTS ===== */
+
 .news-section {
-  padding: 100px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    padding: 100px 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .news-container {
-  max-width: 1100px;
-  width: 95%;
-  padding: 60px 40px;
-  
-  /* EXACT MATCH TO ABOUT SECTION BG */
-  background: rgba(10, 25, 47, 0.75); 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  
-  /* MATCHING THEMED BORDER */
-  border: 1px solid rgba(0, 191, 255, 0.2); 
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    max-width: 1000px; /* Limits width for better readability */
+    width: 100%;
+    padding: 50px 40px;
+    background: rgba(10, 25, 47, 0.85); /* Matches Team/Eligibility background */
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 191, 255, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.news-title {
+    font-size: 3rem;
+    color: #fff;
+    text-align: center; /* Centering the heading */
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border-bottom: 2px solid #00bfff;
+    display: table; /* Allows the border to only be as wide as the text */
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
 }
 
 .news-grid {
-  display: flex;
-  justify-content: space-around;
-  gap: 30px;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
 }
 
-/* Enhancing icon visibility against the glass background */
-.news-icon {
-  font-size: 50px;
-  color: #00bfff; /* Theme Blue */
-  margin-bottom: 20px;
-  filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.3));
-}
-
-.news-label {
-  color: #fff;
-  border-bottom: 2px solid #00bfff;
-  font-weight: 600;
-  text-decoration: none;
-  padding-bottom: 2px;
+.news-item {
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
 }
 
 .news-bold {
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.2rem;
-  margin-bottom: 4px;
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 10px;
 }
 
 .news-sub {
-  color: #cbd5e0;
-  font-size: 0.95rem;
+    display: block;
+    font-size: 0.9rem;
+    color: #ccc;
 }
 
 /* Responsive Fix for News Glass Container */
@@ -757,4 +869,19 @@ body {
 
 .gallery-item:hover .overlay {
   background: rgba(0, 0, 0, 0.8);
+}
+
+#toppersMessage {
+  width: 100%;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 80px 20px;
+  background: rgba(10, 25, 47, 0.8);
+  border: 2px dashed #00bfff;
+  border-radius: 15px;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
