@@ -42,7 +42,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 function filterGallery(category) {
   const items = document.querySelectorAll('.gallery-item');
   const buttons = document.querySelectorAll('.filter-btn');
-  const grid = document.querySelector('.gallery-grid'); // Target the grid
+  const grid = document.querySelector('.gallery-grid');
   const message = document.getElementById('toppersMessage');
 
   // 1. Update active button UI
@@ -53,28 +53,25 @@ function filterGallery(category) {
     }
   });
 
-  // 2. Clear previous state
-  // We want to reset everything before applying the new filter
+  // 2. Reset visibility
   message.style.display = 'none';
   grid.style.display = 'grid';
 
-  // 3. Toppers Logic
+  // 3. Toppers Special Case
   if (category === 'toppers') {
-    grid.style.display = 'none';    // Hide the grid entirely
-    message.style.display = 'block'; // Show the message
-    return; // Exit the function early
+    grid.style.display = 'none';
+    message.style.display = 'block';
+    return;
   }
 
-  // 4. Regular Image Filtering (for All, Pre, During, Post)
+  // 4. Filtering Logic
   let count = 0;
   items.forEach(item => {
-    // Hide initially for animation
     item.style.opacity = '0';
-    item.style.transform = 'scale(0.8)';
+    item.style.transform = 'scale(0.9)';
 
     let shouldShow = false;
     if (category === 'all') {
-      // In 'all' mode, we show the first 8 items marked with class 'all'
       if (item.classList.contains('all') && count < 8) {
         shouldShow = true;
         count++;
@@ -83,10 +80,9 @@ function filterGallery(category) {
       shouldShow = true;
     }
 
-    // Toggle display immediately so they take up space
-    item.style.display = shouldShow ? 'grid' : 'none';
+    // Use 'flex' for items to maintain the image+text vertical stack
+    item.style.display = shouldShow ? 'flex' : 'none';
 
-    // Apply fade-in animation if it should be seen
     if (shouldShow) {
       setTimeout(() => {
         item.style.opacity = '1';
@@ -95,6 +91,7 @@ function filterGallery(category) {
     }
   });
 }
+
 window.addEventListener('DOMContentLoaded', () => {
   filterGallery('all');
 });
